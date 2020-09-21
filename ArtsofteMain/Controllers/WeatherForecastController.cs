@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic;
 
 namespace ArtsofteTestWebApp.Controllers
 {
@@ -27,6 +28,7 @@ namespace ArtsofteTestWebApp.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
+            var wow = string.Empty;
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
                 {
                     Date = DateTime.Now.AddDays(index),
