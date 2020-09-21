@@ -30,6 +30,7 @@ namespace ArtsofteTestWebApp.Controllers
             var rng = new Random();
             var wow = string.Empty;
             var ooo = 34;
+            var sperma = "shiz";
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
                 {
                     Date = DateTime.Now.AddDays(index),
