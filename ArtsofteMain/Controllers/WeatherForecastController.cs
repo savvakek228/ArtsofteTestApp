@@ -29,7 +29,6 @@ namespace ArtsofteTestWebApp.Controllers
         {
             var rng = new Random();
             var wow = string.Empty;
-            var sex = rng;
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
                 {
                     Date = DateTime.Now.AddDays(index),
