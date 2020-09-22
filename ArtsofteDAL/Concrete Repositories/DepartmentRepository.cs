@@ -1,34 +1,36 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using ArtsofteDAL.Generic_Interfaces;
 using ArtsofteDAL.POCO_Entities;
+using Dapper;
+using System.Data.SqlClient;
+using System.Linq;
+using ArtsofteDAL.Base_Classes;
+using ArtsofteDAL.Interfaces;
 
 namespace ArtsofteDAL.Concrete_Repositories
 {
-    public class DepartmentRepository : IRepository<Department>
+    public class DepartmentRepository : RepositoryBase<Department>
     {
-        public void Create(Department type)
+        private readonly IDbConnection _connection;
+        public DepartmentRepository(IUnitOfWork unitOfWork, IDbConnection connection) : base(unitOfWork)
         {
-            throw new System.NotImplementedException();
+            _connection = connection;
         }
 
-        public void Delete(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public override void Create(Department type)
+            => _connection.Execute("INSERT INTO Departments(EmployeeID, Name) VALUES (@EmployeeID, @Name)",type);
 
-        public Department Read(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public override Department Read(int id) =>
+            _connection.Query<Department>("SELECT * FROM Departments WHERE DepartmentID = @id",
+                new { id }).FirstOrDefault();
 
-        public List<Department> ReadAll()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override void Update(Department type) =>
+            _connection.Execute(
+                "UPDATE Departments SET EmployeeID = @EmployeeID, Name = @Name WHERE DepartmentID = @DepartmentID",type);
 
-        public void Update(Department type)
-        {
-            throw new System.NotImplementedException();
-        }
+        public override List<Department> ReadAll()
+            => _connection.Query<Department>("SELECT * FROM Departments").ToList();
     }
+    
 }

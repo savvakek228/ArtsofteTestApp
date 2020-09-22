@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using ArtsofteDAL.Interfaces;
 
 namespace ArtsofteDAL.Generic_Interfaces
 {
-    public interface IRepository<T> where T : class
+    internal interface IRepository<T> : IRepository where T : class
     {
         void Create(T type);
         void Delete(int id);
