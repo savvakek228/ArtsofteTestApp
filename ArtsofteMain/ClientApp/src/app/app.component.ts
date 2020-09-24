@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Department} from "./test/department";
-import {DepartmentsService} from "./test/departments.service";
+import {Department} from "./departments/department";
+import {DepartmentsService} from "./departments/departments.service";
 
 @Component({
   selector: 'app',
@@ -11,6 +11,7 @@ export class AppComponent implements OnInit{
   department: Department = new Department();
   departments: Department[];
   tableMode: boolean = true;
+  enableEdit: boolean = false;
 
   constructor(private departmentService: DepartmentsService) {
   }
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit{
   }
 
   submit(){
+    debugger;
     if (this.department.id == null) {
       this.departmentService.createDepartment(this.department).subscribe((data:Department) => this.departments.push(data));
     }
@@ -34,6 +36,7 @@ export class AppComponent implements OnInit{
   }
 
   editDepartment(d: Department){
+    d.editable = !d.editable;
     this.department = d;
   }
 
@@ -42,7 +45,7 @@ export class AppComponent implements OnInit{
     this.tableMode = true;
   }
   delete(d: Department){
-    this.departmentService.deleteDepartment(d.id).subscribe(data=>this.loadDepartments());
+    this.departmentService.deleteDepartment(d.departmentID).subscribe(data=>this.loadDepartments());
   }
   add(){
     this.cancel();

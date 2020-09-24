@@ -8,6 +8,7 @@ namespace ArtsofteDAL.POCO_Entities
         public int DepartmentID { get; set; } 
         public int EmployeeID { get; set; }
         public string Name { get; set; }
+        public int Floor { get; set; }
         
         // nav property to Employees
         public Employee Employee { get; set; }

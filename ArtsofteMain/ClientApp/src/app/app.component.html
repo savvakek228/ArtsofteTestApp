@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <title></title>
 </head>
@@ -12,73 +11,45 @@
 <table *ngIf="tableMode; else create" class="table table-striped">
   <thead>
   <tr>
-    <td>ID отдела</td>
-    <td>ID сотрудника</td>
     <td>Название</td>
-    <td></td>
+    <td>Этаж</td>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let p of departments">
-    <ng-template [ngIf]="department?.id != p.id" [ngIfElse]="edit">
-      <td>{{p?.id}}</td>
-      <td>{{p?.employeeId}}</td>
-      <td>{{p?.name}}</td>
+  <tr *ngFor="let p of departments;">
       <td>
-        <button class="btn btn-sm btn-primary" (click)="editDepartment(p)">Изменить</button>
+        <span *ngIf="!p.editable">{{p?.name}}</span>
+        <input *ngIf="p.editable" type="text" [(ngModel)]="department.name" class="form-control" />
+      </td>
+      <td>
+        <span *ngIf="!p.editable">{{p?.floor}}</span>
+        <input *ngIf="p.editable" type="number" [(ngModel)]="department.floor" class="form-control" />
+      </td>
+      <td>
+        <button class="btn btn-sm btn-primary" (click)="editDepartment(p)">Изменить/Сохранить</button>
         <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
       </td>
-    </ng-template>
   </tr>
   </tbody>
 </table>
 
-<!--шаблон для редактирования-->
-<ng-template #edit>
-  <td>
-    <label>
-      <input type="text" [(ngModel)]="department.id" class="form-control" />
-    </label>
-  </td>
-  <td>
-    <label>
-      <input type="text" [(ngModel)]="department.employeeId" class="form-control" />
-    </label>
-  </td>
-  <td>
-    <label>
-      <input type="number" [(ngModel)]="department.name" class="form-control" />
-    </label>
-  </td>
-  <td>
-    <input type="button" value="Сохранить" (click)="submit()" class="btn btn-sm btn-success" />
-    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
-  </td>
-</ng-template>
-
 <!--шаблон для добавления-->
 <ng-template #create>
   <div class="form-group">
-    <label>ID отдела</label>
-    <label>
-      <input type="text" [(ngModel)]="department.id" class="form-control" />
-    </label>
-  </div>
-  <div class="form-group">
-    <label>ID сотрудника</label>
-    <label>
-      <input type="text" [(ngModel)]="department.employeeId" class="form-control" />
-    </label>
-  </div>
-  <div class="form-group">
     <label>Название</label>
     <label>
-      <input type="number" [(ngModel)]="department.name" class="form-control" />
+      <input type="text" [(ngModel)]="department.name" class="form-control" />
+    </label>
+  </div>
+  <div class="form-group">
+    <label>Этаж</label>
+    <label>
+      <input type="number" [(ngModel)]="department.floor" class="form-control" />
     </label>
   </div>
   <div>
-    <input type="button" value="Сохранить" (click)="submit()" class="btn btn-success" />
-    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    <input type="button" value="Сохранить" (click)="submit()" class="btn btn-success"/>
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning"/>
   </div>
 </ng-template>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -20,7 +20,7 @@ namespace ArtsofteDAL.Concrete_Repositories
         }
 
         public override void Create(Department type)
-            => _connection.Execute("INSERT INTO Departments(EmployeeID, Name) VALUES (@EmployeeID, @Name)", type);
+            => _connection.Execute("INSERT INTO Departments(EmployeeID, Name, Floor) VALUES (@EmployeeID, @Name, @Floor)", type);
 
         public override Department Read(int id) =>
             _connection.Query<Department>("SELECT * FROM Departments WHERE DepartmentID = @id",
@@ -33,5 +33,10 @@ namespace ArtsofteDAL.Concrete_Repositories
 
         public override List<Department> ReadAll()
             => _connection.Query<Department>("SELECT * FROM Departments").ToList();
+
+        public override void Delete(int id)
+        {
+            _connection.Execute("DELETE FROM Departments WHERE DepartmentID = @id", new {id});
+        }
     }
 }
