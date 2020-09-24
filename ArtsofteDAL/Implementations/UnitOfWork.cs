@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using ArtsofteDAL.Concrete_Repositories;
 using ArtsofteDAL.Generic_Interfaces;
 using ArtsofteDAL.Interfaces;
@@ -23,6 +24,11 @@ namespace ArtsofteDAL.Implementations
         public void RegisterRepo(IRepository repo)
         {
             _repositories.Add(repo.GetType().Name,repo);
+        }
+
+        public IRepository GetRepo(string repoKey)
+        {
+            return _repositories.FirstOrDefault(x => x.Key == repoKey).Value;
         }
         
         public void Dispose()
