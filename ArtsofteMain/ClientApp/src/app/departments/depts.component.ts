@@ -1,19 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {Department} from './department';
-import {DepartmentsService} from "./departments.service";
+import {department} from './department';
+import {departmentsService} from "./departments.service";
 
 @Component({
   selector: 'depts',
-  templateUrl: './depts.component.html',
-  providers: [DepartmentsService]
+  templateUrl: 'depts.component.html',
+  providers: [departmentsService]
 })
-export class DeptsComponent implements OnInit{
-  department: Department = new Department();
-  departments: Department[];
+export class deptsComponent implements OnInit{
+  department: department = new department();
+  departments: department[];
   tableMode: boolean = true;
-  enableEdit: boolean = false;
 
-  constructor(private departmentService: DepartmentsService) {
+  constructor(private departmentService: departmentsService) {
   }
 
   ngOnInit(): void {
@@ -21,35 +20,39 @@ export class DeptsComponent implements OnInit{
   }
 
   loadDepartments(){
-    this.departmentService.getDepartments().subscribe((data: Department[])=> this.departments = data);
+    this.departmentService.getDepartments().subscribe((data: department[])=> this.departments = data);
   }
 
   submit(){
-    if (this.department.id == null) {
-      this.departmentService.createDepartment(this.department).subscribe((data:Department) => this.departments.push(data));
+    debugger;
+    if (this.department.departmentID == null) {
+      this.departmentService.createDepartment(this.department).subscribe((data:department) => this.departments.push(data));
       this.loadDepartments();
     }
     else {
-      this.departmentService.updateDepartment(this.department).subscribe(data => this.loadDepartments());
-      this.loadDepartments();
+      this.departmentService.updateDepartment(this.department).subscribe(() => this.loadDepartments());
     }
     this.cancel();
   }
 
-  editDepartment(d: Department){
+  editDepartment(d: department){
     d.editable = !d.editable;
     this.department = d;
   }
 
   cancel(){
-    this.department = new Department();
+    this.department = new department();
     this.tableMode = true;
   }
-  delete(d: Department){
-    this.departmentService.deleteDepartment(d.departmentID).subscribe(data=>this.loadDepartments());
+  delete(d: department){
+    this.departmentService.deleteDepartment(d.departmentID).subscribe(()=>this.loadDepartments());
   }
   add(){
     this.cancel();
     this.tableMode = false;
+  }
+
+  trackByDeptID(index: number, department: any): number{
+    return department.departmentID;
   }
 }

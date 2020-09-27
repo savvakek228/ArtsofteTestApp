@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace ArtsofteDAL.POCO_Entities
 {
@@ -11,6 +13,7 @@ namespace ArtsofteDAL.POCO_Entities
         public int Floor { get; set; }
         
         // nav property to Employees
+        [JsonIgnore]
         public Employee Employee { get; set; }
     }
 }

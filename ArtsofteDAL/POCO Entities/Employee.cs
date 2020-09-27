@@ -9,8 +9,8 @@ namespace ArtsofteDAL.POCO_Entities
         public int EmployeeID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public Collection<Department> Departments { get; set; }
-        public Collection<Language> Languages { get; set; }
+        public virtual Collection<Department> Departments { get; set; }
+        public virtual Collection<Language> Languages { get; set; }
 
         public Employee()
         {

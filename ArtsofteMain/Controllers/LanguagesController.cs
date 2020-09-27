@@ -24,7 +24,7 @@ namespace ArtsofteTestWebApp.Controllers
         [HttpPost]
         public IActionResult Post(Language language)
         {
-            language.EmployeeID = new Random().Next(5);
+            language.EmployeeID = new Random().Next(4);
             if (ModelState.IsValid)
             {
                 var rep = _uow.GetRepo("LanguageRepository") as LanguageRepository;
@@ -38,7 +38,8 @@ namespace ArtsofteTestWebApp.Controllers
         public IEnumerable<Language> Get()
         {
             var rep = _uow.GetRepo("LanguageRepository") as LanguageRepository;
-            return rep.ReadAll().ToList();
+            var res = rep.ReadAll().ToList();
+            return res;
         }
 
         [HttpPut]

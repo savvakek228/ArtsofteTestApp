@@ -1,7 +1,8 @@
 export class Language {
   constructor(
-    public ID?: number,
-    public Name?: number
+    public languageID?: number,
+    public employeeID?: number,
+    public name?: string
   ) {
   }
 }

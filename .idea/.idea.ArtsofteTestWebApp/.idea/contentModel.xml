@@ -222,10 +222,9 @@
                 <e p="language.ts" t="Include" />
                 <e p="languages.service.ts" t="Include" />
               </e>
-              <e p="nav-menu" t="Include">
-                <e p="nav-menu.component.css" t="Include" />
-                <e p="nav-menu.component.html" t="Include" />
-                <e p="nav-menu.component.ts" t="Include" />
+              <e p="root" t="Include">
+                <e p="main.component.html" t="Include" />
+                <e p="main.component.ts" t="Include" />
               </e>
             </e>
             <e p="assets" t="Include">

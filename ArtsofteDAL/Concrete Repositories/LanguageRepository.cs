@@ -19,8 +19,11 @@ namespace ArtsofteDAL.Concrete_Repositories
             Connection.Open();
         }
         
-        public override void Create(Language type) 
-            => Connection.Execute("INSERT INTO Languages (EmployeeID, Name) VALUES (@EmployeeID,@Name)",type);
+        public override void Create(Language type)
+        {
+            type.LanguageID = null;
+            Connection.Execute("INSERT INTO Languages (EmployeeID, Name) VALUES (@EmployeeID,@Name)", type);
+        }
 
         public override void Delete(int id)
             => Connection.Execute("DELETE FROM Languages WHERE LanguageID = @id", new {id});

@@ -13,20 +13,20 @@
     <td>Этаж</td>
   </tr>
   </thead>
-  <tbody>
-  <tr *ngFor="let p of departments;">
-      <td>
-        <span *ngIf="!p.editable">{{p?.name}}</span>
-        <input *ngIf="p.editable" type="text" [(ngModel)]="department.name" class="form-control" />
-      </td>
-      <td>
-        <span *ngIf="!p.editable">{{p?.floor}}</span>
-        <input *ngIf="p.editable" type="number" [(ngModel)]="department.floor" class="form-control" />
-      </td>
-      <td>
-        <button class="btn btn-sm btn-primary" (click)="editDepartment(p)">Изменить/Сохранить</button>
-        <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
-      </td>
+  <tbody *ngIf="department">
+  <tr *ngFor="let p of departments; trackBy: trackByDeptID">
+    <td>
+      <span *ngIf="!p.editable">{{p?.name}}</span>
+      <input *ngIf="p.editable" type="text" [(ngModel)]="department.name" class="form-control" />
+    </td>
+    <td>
+      <span *ngIf="!p.editable">{{p?.floor}}</span>
+      <input *ngIf="p.editable" type="number" [(ngModel)]="department.floor" class="form-control" />
+    </td>
+    <td>
+      <button class="btn btn-sm btn-primary" (click)="editDepartment(p)">Изменить/Сохранить</button>
+      <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
+    </td>
   </tr>
   </tbody>
 </table>
@@ -49,5 +49,22 @@
     <input type="button" value="Сохранить" (click)="submit()" class="btn btn-success"/>
     <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning"/>
   </div>
+</ng-template>
+
+<ng-template #edit>
+<td>
+  <label>
+    <input type="text" [(ngModel)]="department.name" class="form-control">
+  </label>
+</td>
+<td>
+  <label>
+    <input type="number" [(ngModel)]="department.floor" class="form-control">
+  </label>
+</td>
+<td>
+  <input type="button" value="Сохранить" (click)="submit()" class="btn btn-sm btn-success">
+  <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning">
+</td>
 </ng-template>
 </html>
