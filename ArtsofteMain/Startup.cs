@@ -1,3 +1,9 @@
+using System.Data;
+using System.Data.SqlClient;
+using ArtsofteDAL.Concrete_Repositories;
+using ArtsofteDAL.Implementations;
+using ArtsofteDAL.Interfaces;
+using ArtsofteDAL.POCO_Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +29,7 @@ namespace ArtsofteTestWebApp
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
             services.AddControllers();
+            services.AddScoped<IUnitOfWork,UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

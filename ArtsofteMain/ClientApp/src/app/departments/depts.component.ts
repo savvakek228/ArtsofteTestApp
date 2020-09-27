@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {Department} from "./departments/department";
-import {DepartmentsService} from "./departments/departments.service";
+import {Department} from './department';
+import {DepartmentsService} from "./departments.service";
 
 @Component({
-  selector: 'app',
-  templateUrl: './app.component.html',
+  selector: 'depts',
+  templateUrl: './depts.component.html',
   providers: [DepartmentsService]
 })
-export class AppComponent implements OnInit{
+export class DeptsComponent implements OnInit{
   department: Department = new Department();
   departments: Department[];
   tableMode: boolean = true;
@@ -25,12 +25,13 @@ export class AppComponent implements OnInit{
   }
 
   submit(){
-    debugger;
     if (this.department.id == null) {
       this.departmentService.createDepartment(this.department).subscribe((data:Department) => this.departments.push(data));
+      this.loadDepartments();
     }
     else {
       this.departmentService.updateDepartment(this.department).subscribe(data => this.loadDepartments());
+      this.loadDepartments();
     }
     this.cancel();
   }

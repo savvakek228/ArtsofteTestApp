@@ -12,31 +12,31 @@ namespace ArtsofteDAL.Concrete_Repositories
 {
     public class DepartmentRepository : RepositoryBase<Department>
     {
-        private readonly IDbConnection _connection;
+        public IDbConnection Connection => new SqlConnection(@"Server=LAPTOP-RNC7R08Q\SQLExpress;Database=EmployeesDB;Trusted_Connection=true");
 
-        public DepartmentRepository(IUnitOfWork unitOfWork, IDbConnection connection) : base(unitOfWork)
+        public DepartmentRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _connection = connection;
+            Connection.Open();
         }
 
         public override void Create(Department type)
-            => _connection.Execute("INSERT INTO Departments(EmployeeID, Name, Floor) VALUES (@EmployeeID, @Name, @Floor)", type);
+            => Connection.Execute("INSERT INTO Departments(EmployeeID, Name, Floor) VALUES (@EmployeeID, @Name, @Floor)", type);
 
         public override Department Read(int id) =>
-            _connection.Query<Department>("SELECT * FROM Departments WHERE DepartmentID = @id",
+            Connection.Query<Department>("SELECT * FROM Departments WHERE DepartmentID = @id",
                 new {id}).FirstOrDefault();
 
         public override void Update(Department type) =>
-            _connection.Execute(
+            Connection.Execute(
                 "UPDATE Departments SET EmployeeID = @EmployeeID, Name = @Name WHERE DepartmentID = @DepartmentID",
                 type);
 
         public override List<Department> ReadAll()
-            => _connection.Query<Department>("SELECT * FROM Departments").ToList();
+            => Connection.Query<Department>("SELECT * FROM Departments").ToList();
 
         public override void Delete(int id)
         {
-            _connection.Execute("DELETE FROM Departments WHERE DepartmentID = @id", new {id});
+            Connection.Execute("DELETE FROM Departments WHERE DepartmentID = @id", new {id});
         }
     }
 }

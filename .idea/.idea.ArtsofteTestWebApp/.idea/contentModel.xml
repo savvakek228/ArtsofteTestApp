@@ -202,26 +202,25 @@
           <e p="README.md" t="Include" />
           <e p="src" t="Include">
             <e p="app" t="Include">
-              <e p="app.component.html" t="Include" />
-              <e p="app.component.ts" t="Include" />
               <e p="app.module.ts" t="Include" />
               <e p="app.server.module.ts" t="Include" />
-              <e p="counter" t="Include">
-                <e p="counter.component.html" t="Include" />
-                <e p="counter.component.spec.ts" t="Include" />
-                <e p="counter.component.ts" t="Include" />
-              </e>
               <e p="departments" t="Include">
                 <e p="department.ts" t="Include" />
                 <e p="departments.service.ts" t="Include" />
+                <e p="depts.component.html" t="Include" />
+                <e p="depts.component.ts" t="Include" />
               </e>
-              <e p="fetch-data" t="Include">
-                <e p="fetch-data.component.html" t="Include" />
-                <e p="fetch-data.component.ts" t="Include" />
+              <e p="employees" t="Include">
+                <e p="employee.service.ts" t="Include" />
+                <e p="employee.ts" t="Include" />
+                <e p="emps.component.html" t="Include" />
+                <e p="emps.component.ts" t="Include" />
               </e>
-              <e p="home" t="Include">
-                <e p="home.component.html" t="Include" />
-                <e p="home.component.ts" t="Include" />
+              <e p="languages" t="Include">
+                <e p="langs.component.html" t="Include" />
+                <e p="langs.component.ts" t="Include" />
+                <e p="language.ts" t="Include" />
+                <e p="languages.service.ts" t="Include" />
               </e>
               <e p="nav-menu" t="Include">
                 <e p="nav-menu.component.css" t="Include" />
@@ -252,6 +251,8 @@
         </e>
         <e p="Controllers" t="Include">
           <e p="DepartmentsController.cs" t="Include" />
+          <e p="EmployeesController.cs" t="Include" />
+          <e p="LanguagesController.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">

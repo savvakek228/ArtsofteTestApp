@@ -12,15 +12,12 @@ namespace ArtsofteDAL.Implementations
     public class UnitOfWork : IUnitOfWork
     {
         private readonly Dictionary<string, IRepository> _repositories;
-        public IDbConnection Connection { get;}
         private bool disposed = false;
         
 
-        public UnitOfWork(string connStr)
+        public UnitOfWork()
         {
-            Connection = new SqlConnection(connStr);
             _repositories = new Dictionary<string, IRepository>();
-            Connection.Open();
         }
             
         public void RegisterRepo(IRepository repo)
@@ -30,13 +27,11 @@ namespace ArtsofteDAL.Implementations
         }
 
         public IRepository GetRepo(string repoKey)
-        {
-            return _repositories.FirstOrDefault(x => x.Key == repoKey).Value;
-        }
+            => _repositories.FirstOrDefault(x => x.Key == repoKey).Value;
 
         public virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
@@ -49,7 +44,6 @@ namespace ArtsofteDAL.Implementations
         public void Dispose()
         {
             Dispose(true);
-            Connection.Close();
             GC.SuppressFinalize(this);
         }
     }
