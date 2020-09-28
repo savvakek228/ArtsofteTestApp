@@ -25,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="ClientApp\src\app\nav-menu" />
       <Folder Include="wwwroot" />
     </ItemGroup>
 

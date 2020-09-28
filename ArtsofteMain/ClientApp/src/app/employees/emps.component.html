@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-заглушка для сотрудников
-</body>
-</html>
+<h1>Сотрудники</h1>
+<input class="btn btn-default" type="button" value="Добавить" (click)="add()"/>
+<table *ngIf="tableMode; else create">
+
+</table>
+<ng-template #create>
+  <div class="form-group">
+    <label>Имя</label>
+    <label>
+      <input type="text" [(ngModel)]="employee.name" class="form-control" />
+    </label>
+  </div>
+  <div class="form-group">
+    <label>Фамилия</label>
+    <label>
+      <input type="text" [(ngModel)]="employee.surname" class="form-control" />
+    </label>
+  </div>
+  <div class="form-group">
+    <label>Возраст</label>
+    <label>
+      <input type="number" [(ngModel)]="employee.age" class="form-control" />
+    </label>
+  </div>
+  <div class="form-group">
+    <label>Пол</label>
+    <label>
+      <mat-form-field appearance="standard">
+        <mat-label>Укажите ваш пол</mat-label>
+        <mat-select [(ngModel)]="employee.gender" name="gender">
+          <mat-option *ngFor="let gen of genders" [value]="gender">
+
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </label>
+  </div>
+  <div>
+    <input type="button" value="Сохранить" (click)="submit()" class="btn btn-success"/>
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning"/>
+  </div>
+</ng-template>

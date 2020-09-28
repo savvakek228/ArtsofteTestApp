@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {department} from './department';
 import {departmentsService} from "./departments.service";
+import {Language} from "../languages/language";
 
 @Component({
   selector: 'depts',
@@ -24,10 +25,8 @@ export class deptsComponent implements OnInit{
   }
 
   submit(){
-    debugger;
     if (this.department.departmentID == null) {
-      this.departmentService.createDepartment(this.department).subscribe((data:department) => this.departments.push(data));
-      this.loadDepartments();
+      this.departmentService.createDepartment(this.department).subscribe(()=>this.loadDepartments());
     }
     else {
       this.departmentService.updateDepartment(this.department).subscribe(() => this.loadDepartments());

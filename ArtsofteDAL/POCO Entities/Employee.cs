@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿﻿using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ArtsofteDAL.POCO_Entities
@@ -9,6 +9,8 @@ namespace ArtsofteDAL.POCO_Entities
         public int EmployeeID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public bool Gender { get; set; }
+        public int Age { get; set; }
         public virtual Collection<Department> Departments { get; set; }
         public virtual Collection<Language> Languages { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
 using System.Data;
 using ArtsofteDAL.Generic_Interfaces;
 using ArtsofteDAL.POCO_Entities;
@@ -20,7 +20,11 @@ namespace ArtsofteDAL.Concrete_Repositories
         }
 
         public override void Create(Department type)
-            => Connection.Execute("INSERT INTO Departments(EmployeeID, Name, Floor) VALUES (@EmployeeID, @Name, @Floor)", type);
+        {
+            type.DepartmentID = null;
+            Connection.Execute("INSERT INTO Departments(EmployeeID, Name, Floor) VALUES (@EmployeeID, @Name, @Floor)",
+                type);
+        }
 
         public override Department Read(int id) =>
             Connection.Query<Department>("SELECT * FROM Departments WHERE DepartmentID = @id",

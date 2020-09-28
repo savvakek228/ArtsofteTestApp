@@ -1,34 +1,52 @@
-﻿using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using ArtsofteDAL.Base_Classes;
 using ArtsofteDAL.Generic_Interfaces;
+using ArtsofteDAL.Interfaces;
 using ArtsofteDAL.POCO_Entities;
+using Dapper;
 
 namespace ArtsofteDAL.Concrete_Repositories
 {
-    public class EmployeeRepository : IRepository<Employee>
+    public class EmployeeRepository : RepositoryBase<Employee>
     {
-        public void Create(Employee type)
+        public IDbConnection Connection => new SqlConnection(@"Server=LAPTOP-RNC7R08Q\SQLExpress;Database=EmployeesDB;Trusted_Connection=true");
+        public EmployeeRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            throw new System.NotImplementedException();
+            Connection.Open();
+        }
+        public override void Create(Employee type)
+        {
+            Connection.Execute("INSERT INTO Employees (Name, Surname, Gender, Age, Department, Language) VALUES (@Name, @Surname, @Gender, @Age, @Department, @Language)",type);
         }
 
-        public void Delete(int id)
+        public override void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            Connection.Execute("DELETE FROM Employees WHERE EmployeeID = @id", new {id});
         }
 
-        public Employee Read(int id)
+        public override Employee Read(int id)
         {
-            throw new System.NotImplementedException();
+            return Connection.Query<Employee>("SELECT * FROM Employees WHERE EmployeeID = @id", new {id}).FirstOrDefault();
         }
 
-        public List<Employee> ReadAll()
+        public override List<Employee> ReadAll()
         {
-            throw new System.NotImplementedException();
+            return Connection.Query<Employee>("SELECT * FROM Employees").ToList();
         }
 
-        public void Update(Employee type)
+        public override void Update(Employee type)
         {
-            throw new System.NotImplementedException();
+            Connection.Execute("UPDATE Employees SET" +
+                               "Name = @Name, "+
+                               "Surname = @Surname,"+
+                               "Gender = @Gender,"+
+                               "Age = @Age,"+
+                               "Department = @Department,"+
+                               "Language = @Language"+
+                               "WHERE EmployeeID = @EmployeeID",type);
         }
     }
 }

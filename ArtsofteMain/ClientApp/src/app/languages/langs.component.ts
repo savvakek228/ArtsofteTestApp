@@ -12,7 +12,7 @@ export class langsComponent implements OnInit{
   languages: Language[];
   tableMode: boolean = true;
 
-  constructor(private languagesService: languagesService, private cdr: ChangeDetectorRef) {
+  constructor(private languagesService: languagesService) {
   }
 
   ngOnInit(): void {
@@ -25,11 +25,10 @@ export class langsComponent implements OnInit{
 
   submit(){
     if(this.language.languageID == null) {
-      this.languagesService.createLanguage(this.language).subscribe((data:Language)=>this.languages.push(data));
-      this.loadLanguages();
+      this.languagesService.createLanguage(this.language).subscribe(()=>this.loadLanguages());
     }
     else {
-      this.languagesService.updateLanguage(this.language).subscribe(data=>this.loadLanguages());
+      this.languagesService.updateLanguage(this.language).subscribe(()=>this.loadLanguages());
     }
     this.cancel();
   }
