@@ -2,6 +2,10 @@ import {Component, OnInit} from "@angular/core";
 import {employeeService} from "./employee.service";
 import {Employee} from "./employee";
 
+interface Gender {
+  name: string,
+  value: boolean
+}
 
 @Component({
   selector: 'emps',
@@ -9,11 +13,12 @@ import {Employee} from "./employee";
   providers: [employeeService]
 
 })
+
 export class empsComponent implements OnInit{
   employee: Employee = new Employee();
   employees: Employee[];
   tableMode: boolean = true;
-  genders: ["Мужчина", "Женщина"];
+  genders: Gender[] = [{name: "Муж", value: true}, {name: "Жен",value:false}];
 
   constructor(private employeeService: employeeService) {
 
