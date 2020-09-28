@@ -65,14 +65,12 @@
             <e p="tsconfig.e2e.json" t="Include" />
           </e>
           <e p="node_modules\@angular\animations" t="IncludeRecursive" />
-          <e p="node_modules\@angular\cdk" t="IncludeRecursive" />
           <e p="node_modules\@angular\cli" t="IncludeRecursive" />
           <e p="node_modules\@angular\common" t="IncludeRecursive" />
           <e p="node_modules\@angular\compiler" t="IncludeRecursive" />
           <e p="node_modules\@angular\compiler-cli" t="IncludeRecursive" />
           <e p="node_modules\@angular\core" t="IncludeRecursive" />
           <e p="node_modules\@angular\forms" t="IncludeRecursive" />
-          <e p="node_modules\@angular\material" t="IncludeRecursive" />
           <e p="node_modules\@angular\platform-browser" t="IncludeRecursive" />
           <e p="node_modules\@angular\platform-browser-dynamic" t="IncludeRecursive" />
           <e p="node_modules\@angular\platform-server" t="IncludeRecursive" />
@@ -217,7 +215,6 @@
                 <e p="employee.ts" t="Include" />
                 <e p="emps.component.html" t="Include" />
                 <e p="emps.component.ts" t="Include" />
-                <e p="genders.ts" t="Include" />
               </e>
               <e p="languages" t="Include">
                 <e p="langs.component.html" t="Include" />
@@ -225,7 +222,6 @@
                 <e p="language.ts" t="Include" />
                 <e p="languages.service.ts" t="Include" />
               </e>
-              <e p="nav-menu" t="Include" />
               <e p="root" t="Include">
                 <e p="main.component.html" t="Include" />
                 <e p="main.component.ts" t="Include" />

@@ -8,8 +8,6 @@ import { empsComponent } from "./employees/emps.component";
 import {RouterModule, Routes} from "@angular/router";
 import {rootComponent} from "./root/main.component";
 import {main} from "@angular/compiler-cli/src/main";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSelectModule} from "@angular/material/select";
 
 const appRoutes: Routes = [
   {path: '', component: empsComponent},
@@ -18,7 +16,7 @@ const appRoutes: Routes = [
 ]
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes), BrowserAnimationsModule, MatSelectModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule,RouterModule.forRoot(appRoutes)],
   declarations: [deptsComponent,langsComponent, empsComponent,rootComponent],
   bootstrap: [rootComponent]
 })
