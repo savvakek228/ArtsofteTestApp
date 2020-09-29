@@ -8,14 +8,13 @@
   </thead>
   <tbody>
   <tr *ngFor="let p of languages; trackBy: trackByLangID">
-    <td>
-      <span *ngIf="!p.editable">{{p?.name}}</span>
-      <input *ngIf="p.editable" type="text" [(ngModel)]="language.name" class="form-control" />
-    </td>
-    <td>
-      <button class="btn btn-sm btn-primary" (click)="editLanguage(p)">Изменить/Сохранить</button>
-      <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
-    </td>
+    <ng-template [ngIf]="language?.languageID != p.languageID" [ngIfElse]="edit">
+      <td>{{p?.name}}</td>
+      <td>
+        <button class="btn btn-sm btn-primary" (click)="editLanguage(p)">Изменить/Сохранить</button>
+        <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
+      </td>
+    </ng-template>
   </tr>
   </tbody>
 </table>

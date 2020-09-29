@@ -52,19 +52,19 @@
 </ng-template>
 
 <ng-template #edit>
-<td>
+  <td>
   <label>
     <input type="text" [(ngModel)]="department.name" class="form-control">
   </label>
-</td>
-<td>
+  </td>
+  <td>
   <label>
     <input type="number" [(ngModel)]="department.floor" class="form-control">
   </label>
-</td>
-<td>
+  </td>
+  <td>
   <input type="button" value="Сохранить" (click)="submit()" class="btn btn-sm btn-success">
   <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning">
-</td>
+  </td>
 </ng-template>
 </html>

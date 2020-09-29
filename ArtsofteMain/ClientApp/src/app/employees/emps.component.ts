@@ -26,6 +26,7 @@ export class empsComponent implements OnInit{
 
 
   ngOnInit(): void {
+    this.loadEmployees();
   }
 
   loadEmployees(){
