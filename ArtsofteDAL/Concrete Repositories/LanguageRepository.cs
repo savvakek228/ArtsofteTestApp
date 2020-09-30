@@ -21,7 +21,6 @@ namespace ArtsofteDAL.Concrete_Repositories
         
         public override void Create(Language type)
         {
-            type.LanguageID = null;
             Connection.Execute("INSERT INTO Languages (EmployeeID, Name) VALUES (@EmployeeID,@Name)", type);
         }
 

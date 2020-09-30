@@ -1,6 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {employeeService} from "./employee.service";
 import {Employee} from "./employee";
+import {Department} from "../departments/department";
+import {Language} from "../languages/language";
+import {BehaviorSubject, Observable} from "rxjs";
+import {map, tap} from "rxjs/operators";
+import {departmentsService} from "../departments/departments.service";
+import {languagesService} from "../languages/languages.service";
 
 interface Gender {
   name: string,
@@ -10,41 +16,53 @@ interface Gender {
 @Component({
   selector: 'emps',
   templateUrl: 'emps.component.html',
-  providers: [employeeService]
+  providers: [employeeService, departmentsService, languagesService]
 
 })
 
 export class empsComponent implements OnInit{
   employee: Employee = new Employee();
-  employees: Employee[];
+  employees$: Observable<Object>;
+  empDepartments$: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>(null);
+  empLanguages$: BehaviorSubject<Language[]> = new BehaviorSubject<Language[]>(null);
   tableMode: boolean = true;
   genders: Gender[] = [{name: "Муж", value: true}, {name: "Жен",value:false}];
 
-  constructor(private employeeService: employeeService) {
+  constructor(private employeeService: employeeService,
+              private languagesService: languagesService,
+              private departmentsService: departmentsService) {
 
   }
-
 
   ngOnInit(): void {
-    this.loadEmployees();
+    console.log(this.genders);
+    this.loadAllData();
   }
 
-  loadEmployees(){
-    this.employeeService.getEmployees().subscribe((data: Employee[])=>this.employees=data);
+  loadAllData(){
+    this.employees$ = this.employeeService.getEmployees()
+      .pipe(tap(()=>
+      {
+        this.departmentsService.getDepartments().subscribe((data:Department[])=>this.empDepartments$.next(data));
+        console.log(this.empDepartments$);
+        this.languagesService.getLanguages().subscribe((data:Language[])=>this.empLanguages$.next(data));
+        console.log(this.empLanguages$);
+      }))
   }
 
   submit(){
+    debugger;
     if(this.employee.employeeID == null) {
-      this.employeeService.createEmployee(this.employee).subscribe(()=>this.loadEmployees());
+      this.employeeService.createEmployee(this.employee).subscribe(()=>this.loadAllData());
     }
     else {
-      this.employeeService.updateEmployee(this.employee).subscribe(()=>this.loadEmployees());
+      this.employeeService.updateEmployee(this.employee).subscribe(()=>this.loadAllData());
     }
     this.cancel();
   }
 
   delete(e: Employee){
-    this.employeeService.deleteEmployee(e.employeeID).subscribe(()=>this.loadEmployees());
+    this.employeeService.deleteEmployee(e.employeeID).subscribe(()=>this.loadAllData());
   }
 
   add(){

@@ -21,7 +21,6 @@ namespace ArtsofteDAL.Concrete_Repositories
 
         public override void Create(Department type)
         {
-            type.DepartmentID = null;
             Connection.Execute("INSERT INTO Departments(EmployeeID, Name, Floor) VALUES (@EmployeeID, @Name, @Floor)",
                 type);
         }

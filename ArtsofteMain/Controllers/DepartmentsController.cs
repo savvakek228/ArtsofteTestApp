@@ -25,7 +25,6 @@ namespace ArtsofteTestWebApp.Controllers
         [HttpPost]
         public IActionResult Post(Department department)
         {
-            department.EmployeeID = new Random().Next(5);
             if (ModelState.IsValid)
             {
                 var rep = _uow.GetRepo("DepartmentRepository") as DepartmentRepository;

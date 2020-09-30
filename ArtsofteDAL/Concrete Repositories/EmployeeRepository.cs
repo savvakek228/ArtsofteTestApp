@@ -34,7 +34,18 @@ namespace ArtsofteDAL.Concrete_Repositories
 
         public override List<Employee> ReadAll()
         {
-            return Connection.Query<Employee>("SELECT * FROM Employees").ToList();
+            var SQL =
+                @"SELECT * FROM Employees AS E INNER JOIN Departments AS D on D.DepartmentID = E.DepartmentID INNER JOIN Languages AS L on E.LanguageID = L.LanguageID";
+            var result = Connection.Query<Employee, Department, Language, Employee>(SQL, (employee, department, language) =>
+            {
+                employee.Department = department;
+                employee.Language = language;
+                return employee;
+            },
+                splitOn: "DepartmentID, LanguageID")
+                .Distinct()
+                .ToList();
+            return result;
         }
 
         public override void Update(Employee type)

@@ -1,6 +1,6 @@
 <h1>Сотрудники</h1>
 <input class="btn btn-default" type="button" value="Добавить" (click)="add()"/>
-<table *ngIf="tableMode; else create">
+<table *ngIf="tableMode; else create" class="table table-striped">
   <thead>
   <tr>
     <td>Имя</td>
@@ -9,11 +9,23 @@
     <td>Пол</td>
     <td>Отдел</td>
     <td>Язык программирования</td>
+    <td></td>
   </tr>
   </thead>
   <tbody *ngIf="employee">
-  <tr *ngFor="let e of employees; trackBy: trackByEmpID">
-
+  <tr *ngFor="let e of employees$ | async; trackBy: trackByEmpID">
+    <ng-template [ngIf]="employee?.employeeID != e.employeeID" [ngIfElse]="edit">
+      <td>{{e.name}}</td>
+      <td>{{e.surname}}</td>
+      <td>{{e.age}}</td>
+      <td>{{e.gender}}</td>
+      <td>{{e.department.name}}</td>
+      <td>{{e.language.name}}</td>
+      <td>
+        <button class="btn btn-sm btn-primary" (click)="editEmployee(e)">Изменить</button>
+        <button class="btn btn-sm btn-danger" (click)="delete(e)">Удалить</button>
+      </td>
+    </ng-template>
   </tr>
   </tbody>
 </table>
@@ -51,9 +63,9 @@
   <div class="form-group">
   <label>Отдел</label>
   <label>
-    <select class="form-control" [(ngModel)]="employee.gender">
-      <option *ngFor="let gender of genders" [value]="gender.value">
-        {{gender.name}}
+    <select class="form-control" [(ngModel)]="employee.department.name">
+      <option *ngFor="let d of empDepartments$ | async" [value]="d.name">
+        {{d.name}}
       </option>
     </select>
   </label>
@@ -61,9 +73,9 @@
   <div class="form-group">
   <label>Язык программирования</label>
   <label>
-    <select class="form-control" [(ngModel)]="employee.gender">
-      <option *ngFor="let gender of genders" [value]="gender.value">
-        {{gender.name}}
+    <select class="form-control" [(ngModel)]="employee.language.name">
+      <option *ngFor="let l of empLanguages$ | async" [value]="l.name">
+        {{l.name}}
       </option>
     </select>
   </label>

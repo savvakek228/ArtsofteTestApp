@@ -1,4 +1,4 @@
-﻿﻿import {department} from "./department";
+﻿﻿import {Department} from "./department";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 
@@ -9,7 +9,7 @@ export class departmentsService {
   constructor(private http: HttpClient) {
   }
 
-  createDepartment(department: department){
+  createDepartment(department: Department){
     return this.http.post(this.url,department);
   }
 
@@ -21,7 +21,7 @@ export class departmentsService {
     return this.http.get(this.url+"/"+id);
   }
 
-  updateDepartment(department: department){
+  updateDepartment(department: Department){
     return this.http.put(this.url,department);
   }
 

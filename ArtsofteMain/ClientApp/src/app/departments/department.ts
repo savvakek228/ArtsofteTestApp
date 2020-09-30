@@ -1,9 +1,8 @@
-﻿﻿export class department{
+﻿export class Department{
   constructor(
     public departmentID?: number,
     public name?: string,
-    public floor?: number,
-    public editable?: boolean
+    public floor?: number
   ) {
   }
 }

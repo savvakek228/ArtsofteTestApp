@@ -24,7 +24,6 @@ namespace ArtsofteTestWebApp.Controllers
         [HttpPost]
         public IActionResult Post(Language language)
         {
-            language.EmployeeID = new Random().Next(4);
             if (ModelState.IsValid)
             {
                 var rep = _uow.GetRepo("LanguageRepository") as LanguageRepository;

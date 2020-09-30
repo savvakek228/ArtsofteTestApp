@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {department} from './department';
+import {Department} from './department';
 import {departmentsService} from "./departments.service";
 import {Language} from "../languages/language";
 
@@ -9,8 +9,8 @@ import {Language} from "../languages/language";
   providers: [departmentsService]
 })
 export class deptsComponent implements OnInit{
-  department: department = new department();
-  departments: department[];
+  department: Department = new Department();
+  departments: Department[];
   tableMode: boolean = true;
 
   constructor(private departmentService: departmentsService) {
@@ -21,7 +21,7 @@ export class deptsComponent implements OnInit{
   }
 
   loadDepartments(){
-    this.departmentService.getDepartments().subscribe((data: department[])=> this.departments = data);
+    this.departmentService.getDepartments().subscribe((data: Department[])=> this.departments = data);
   }
 
   submit(){
@@ -34,16 +34,15 @@ export class deptsComponent implements OnInit{
     this.cancel();
   }
 
-  editDepartment(d: department){
-    d.editable = !d.editable;
+  editDepartment(d: Department){
     this.department = d;
   }
 
   cancel(){
-    this.department = new department();
+    this.department = new Department();
     this.tableMode = true;
   }
-  delete(d: department){
+  delete(d: Department){
     this.departmentService.deleteDepartment(d.departmentID).subscribe(()=>this.loadDepartments());
   }
   add(){
