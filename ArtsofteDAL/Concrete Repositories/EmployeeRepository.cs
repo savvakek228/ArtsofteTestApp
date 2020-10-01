@@ -19,7 +19,7 @@ namespace ArtsofteDAL.Concrete_Repositories
         }
         public override void Create(Employee type)
         {
-            Connection.Execute("INSERT INTO Employees (Name, Surname, Gender, Age, Department, Language) VALUES (@Name, @Surname, @Gender, @Age, @Department, @Language)",type);
+            Connection.Execute("INSERT INTO Employees (Name, Surname, Gender, Age, DepartmentID, LanguageID) VALUES (@Name, @Surname, @Gender, @Age, @Department.DepartmentID, @Language.LanguageID)",type);
         }
 
         public override void Delete(int id)
@@ -55,8 +55,8 @@ namespace ArtsofteDAL.Concrete_Repositories
                                "Surname = @Surname,"+
                                "Gender = @Gender,"+
                                "Age = @Age,"+
-                               "Department = @Department,"+
-                               "Language = @Language"+
+                               "DepartmentID = @Department.DepartmentID,"+
+                               "LanguageID = @Language.LanguageID"+
                                "WHERE EmployeeID = @EmployeeID",type);
         }
     }

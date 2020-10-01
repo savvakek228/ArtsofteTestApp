@@ -4,14 +4,10 @@ import {Employee} from "./employee";
 import {Department} from "../departments/department";
 import {Language} from "../languages/language";
 import {BehaviorSubject, Observable} from "rxjs";
-import {map, tap} from "rxjs/operators";
+import {tap} from "rxjs/operators";
 import {departmentsService} from "../departments/departments.service";
 import {languagesService} from "../languages/languages.service";
-
-interface Gender {
-  name: string,
-  value: boolean
-}
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'emps',
@@ -21,17 +17,19 @@ interface Gender {
 })
 
 export class empsComponent implements OnInit{
+  employeeForm: FormGroup;
   employee: Employee = new Employee();
   employees$: Observable<Object>;
   empDepartments$: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>(null);
   empLanguages$: BehaviorSubject<Language[]> = new BehaviorSubject<Language[]>(null);
   tableMode: boolean = true;
-  genders: Gender[] = [{name: "Муж", value: true}, {name: "Жен",value:false}];
+  genders: string[] =  ["Мужчина", "Женщина"];
 
   constructor(private employeeService: employeeService,
               private languagesService: languagesService,
-              private departmentsService: departmentsService) {
-
+              private departmentsService: departmentsService,
+              private formBuilder: FormBuilder) {
+    this.initializeForm();
   }
 
   ngOnInit(): void {
@@ -50,8 +48,28 @@ export class empsComponent implements OnInit{
       }))
   }
 
+  initializeForm(){
+    this.employeeForm =
+      this.formBuilder.group({
+      name:['',Validators.required],
+      surname:['', Validators.required],
+      age:['', Validators.required],
+      gender:['',Validators.required],
+      department:['',Validators.required],
+      language:['',Validators.required]
+    });
+  }
+
+  isControlInvalid(controlName: string) : boolean{
+    const control = this.employeeForm.controls[controlName];
+    return control.invalid && control.touched;
+  }
+
+  revert(){
+    this.employeeForm.reset();
+  }
+
   submit(){
-    debugger;
     if(this.employee.employeeID == null) {
       this.employeeService.createEmployee(this.employee).subscribe(()=>this.loadAllData());
     }
@@ -72,6 +90,18 @@ export class empsComponent implements OnInit{
 
   editEmployee(e: Employee){
     this.employee = e;
+  }
+
+  onSubmit(){
+    const controls = this.employeeForm.controls;
+    if (this.employeeForm.invalid){
+      Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched())
+      return;
+    }
+    this.employee = this.employeeForm.value
+    this.employee.gender = this.employeeForm.value.gender== "Мужчина";
+    console.log(this.employee);
+    this.submit();
   }
 
   cancel(){
