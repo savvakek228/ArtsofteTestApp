@@ -1,6 +1,7 @@
 import {Component, OnInit, Optional, ChangeDetectorRef} from "@angular/core";
 import {languagesService} from "./languages.service";
 import {Language} from "./language";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: "lang",
@@ -8,6 +9,7 @@ import {Language} from "./language";
   providers: [languagesService]
 })
 export class langsComponent implements OnInit{
+  languagesForm: FormGroup;
   language: Language = new Language();
   languages: Language[];
   tableMode: boolean = true;

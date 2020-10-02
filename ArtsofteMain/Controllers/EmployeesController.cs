@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ArtsofteTestWebApp.Controllers
 {
     [ApiController]
-    [Route("/emps")]
+    [Route("/employees")]
     public class EmployeesController : ControllerBase
     {
         private readonly IUnitOfWork _uow;

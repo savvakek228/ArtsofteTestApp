@@ -7,7 +7,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {departmentsService} from "../departments/departments.service";
 import {languagesService} from "../languages/languages.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'emps',
@@ -18,6 +18,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 export class empsComponent implements OnInit{
   employeeForm: FormGroup;
+  editing: boolean = false;
   employee: Employee = new Employee();
   employees$: Observable<Object>;
   empDepartments$: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>(null);
@@ -33,7 +34,6 @@ export class empsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log(this.genders);
     this.loadAllData();
   }
 
@@ -42,9 +42,7 @@ export class empsComponent implements OnInit{
       .pipe(tap(()=>
       {
         this.departmentsService.getDepartments().subscribe((data:Department[])=>this.empDepartments$.next(data));
-        console.log(this.empDepartments$);
         this.languagesService.getLanguages().subscribe((data:Language[])=>this.empLanguages$.next(data));
-        console.log(this.empLanguages$);
       }))
   }
 
@@ -71,7 +69,6 @@ export class empsComponent implements OnInit{
 
   submit(){
     if(this.employee.employeeID == null) {
-
       this.employeeService.createEmployee(this.employee).subscribe(()=>this.loadAllData());
     }
     else {
@@ -90,31 +87,40 @@ export class empsComponent implements OnInit{
   }
 
   editEmployee(e: Employee){
+    this.editing = !this.editing;
+    this.tableMode = !this.tableMode;
     this.employee = e;
+    this.employeeForm.patchValue({
+      name: this.employee.name,
+      surname: this.employee.surname,
+      age: this.employee.age,
+      gender: this.employee.gender ? this.genders[0] : this.genders[1],
+      department: this.employee.department.name,
+      language: this.employee.language.name
+    })
   }
 
   onSubmit(){
     const controls = this.employeeForm.controls;
     if (this.employeeForm.invalid){
+      console.log("БЛЯДЬ");
       Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched())
       return;
     }
     this.employee = this.employeeForm.value
     this.employee.gender = this.employeeForm.value.gender == "Мужчина";
-    console.log(this.employee);
     this.submit();
   }
 
   cancel(){
     this.employee = new Employee();
     this.tableMode = true;
+    this.editing = false;
   }
 
   trackByEmpID(index:number,emp?: any): number {
     if (emp.employeeID != null) {
       return emp.employeeID;
     }
-
-
   }
 }

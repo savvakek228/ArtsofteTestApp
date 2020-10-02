@@ -14,7 +14,7 @@
   </thead>
   <tbody *ngIf="employee">
   <tr *ngFor="let e of employees$ | async; trackBy: trackByEmpID">
-    <ng-template [ngIf]="employee?.employeeID != e.employeeID" [ngIfElse]="edit">
+    <ng-template [ngIf]="employee?.employeeID != e.employeeID">
       <td>{{e.name}}</td>
       <td>{{e.surname}}</td>
       <td>{{e.age}}</td>
@@ -22,8 +22,8 @@
       <td>{{e.department.name}}</td>
       <td>{{e.language.name}}</td>
       <td>
-        <button class="btn btn-sm btn-primary" (click)="editEmployee(e)">Изменить</button>
-        <button class="btn btn-sm btn-danger" (click)="delete(e)">Удалить</button>
+        <button class="btn btn-primary" (click)="editEmployee(e)">Редактировать</button>
+        <button class="btn btn-danger" (click)="delete(e)">Удалить</button>
       </td>
     </ng-template>
   </tr>
@@ -32,7 +32,8 @@
 
 
 <ng-container *ngIf="!tableMode">
-  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
+  <h2>{{this.editing ? "Редактирование существующего сотрудника" : "Добавление нового сотрудника"}}</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Имя</label>
       <input id="name" type="text" class="form-control" formControlName="name"/>
@@ -78,13 +79,7 @@
       </div>
       <button class="btn btn-sm btn-success" type="submit">Сохранить</button>
       <button class="btn btn-sm btn-warning" type="reset" (click)="revert()">Сброс</button>
-      <button class="btn btn-sm btn-danger" (click)="cancel()">Отмена</button>
+      <button type="button" class="btn btn-sm btn-danger" (click)="cancel()">Отмена</button>
     </div>
   </form>
 </ng-container>
-
-<ng-template #edit>
-<form [formGroup]="employeeForm">
-  
-</form>
-</ng-template>
