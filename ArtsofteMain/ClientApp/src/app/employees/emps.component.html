@@ -18,7 +18,7 @@
       <td>{{e.name}}</td>
       <td>{{e.surname}}</td>
       <td>{{e.age}}</td>
-      <td>{{e.gender}}</td>
+      <td>{{e.gender ? "Мужчина" : "Женщина"}}</td>
       <td>{{e.department.name}}</td>
       <td>{{e.language.name}}</td>
       <td>
@@ -31,7 +31,7 @@
 </table>
 
 
-<div *ngIf="!tableMode">
+<ng-container *ngIf="!tableMode">
   <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="form-group">
       <label for="name">Имя</label>
@@ -81,8 +81,10 @@
       <button class="btn btn-sm btn-danger" (click)="cancel()">Отмена</button>
     </div>
   </form>
-</div>
+</ng-container>
 
 <ng-template #edit>
-
+<form [formGroup]="employeeForm">
+  
+</form>
 </ng-template>

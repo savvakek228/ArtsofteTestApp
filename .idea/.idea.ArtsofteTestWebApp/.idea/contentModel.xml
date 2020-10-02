@@ -211,6 +211,7 @@
                 <e p="depts.component.ts" t="Include" />
               </e>
               <e p="employees" t="Include">
+                <e p="autocomplete.js" t="Include" />
                 <e p="employee.service.ts" t="Include" />
                 <e p="employee.ts" t="Include" />
                 <e p="emps.component.html" t="Include" />
@@ -261,16 +262,14 @@
             </e>
           </e>
         </e>
-        <e p="Pages" t="Include">
-          <e p="_ViewImports.cshtml" t="Include" />
-          <e p="Error.cshtml" t="Include" />
-          <e p="Error.cshtml.cs" t="Include" />
-        </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="Startup.cs" t="Include" />
+        <e p="ViewModels" t="Include">
+          <e p="EmployeeViewModel.cs" t="Include" />
+        </e>
         <e p="wwwroot" t="Include" />
       </e>
       <e p="ArtsofteTestWebApp.sln" t="IncludeFlat" />

@@ -3,6 +3,7 @@ using System.Linq;
 using ArtsofteDAL.Concrete_Repositories;
 using ArtsofteDAL.Interfaces;
 using ArtsofteDAL.POCO_Entities;
+using ArtsofteTestWebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArtsofteTestWebApp.Controllers
@@ -21,11 +22,28 @@ namespace ArtsofteTestWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Employee employee)
+        public IActionResult Post(EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
                 var rep = _uow.GetRepo("EmployeeRepository") as EmployeeRepository;
+                var employee = new Employee
+                {
+                    Name = employeeViewModel.Name,
+                    Surname = employeeViewModel.Surname,
+                    Age = employeeViewModel.Age,
+                    Gender = employeeViewModel.Gender,
+                    Department = new Department()
+                    {
+                        DepartmentID = rep.GetDepartmentIDByName(employeeViewModel.Department),
+                        Name = employeeViewModel.Department
+                    },
+                    Language = new Language()
+                    {
+                        LanguageID = rep.GetLanguageIDByName(employeeViewModel.Language),
+                        Name = employeeViewModel.Language
+                    }
+                };
                 rep.Create(employee);
                 return Ok();
             }

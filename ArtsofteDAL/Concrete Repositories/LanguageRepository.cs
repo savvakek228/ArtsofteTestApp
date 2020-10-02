@@ -18,10 +18,10 @@ namespace ArtsofteDAL.Concrete_Repositories
         {
             Connection.Open();
         }
-        
+
         public override void Create(Language type)
         {
-            Connection.Execute("INSERT INTO Languages (EmployeeID, Name) VALUES (@EmployeeID,@Name)", type);
+            Connection.Execute("INSERT INTO Languages (Name) VALUES (@Name)", type);
         }
 
         public override void Delete(int id)

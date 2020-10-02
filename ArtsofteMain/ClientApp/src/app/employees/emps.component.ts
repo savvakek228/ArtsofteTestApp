@@ -71,6 +71,7 @@ export class empsComponent implements OnInit{
 
   submit(){
     if(this.employee.employeeID == null) {
+
       this.employeeService.createEmployee(this.employee).subscribe(()=>this.loadAllData());
     }
     else {
@@ -99,7 +100,7 @@ export class empsComponent implements OnInit{
       return;
     }
     this.employee = this.employeeForm.value
-    this.employee.gender = this.employeeForm.value.gender== "Мужчина";
+    this.employee.gender = this.employeeForm.value.gender == "Мужчина";
     console.log(this.employee);
     this.submit();
   }
