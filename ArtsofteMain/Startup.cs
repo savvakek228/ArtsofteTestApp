@@ -27,6 +27,7 @@ namespace ArtsofteTestWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             // In production, the Angular files will be served from this directory
+            services.AddCors();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
             services.AddControllers();
             services.AddScoped<IUnitOfWork,UnitOfWork>();
@@ -46,6 +47,13 @@ namespace ArtsofteTestWebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+            });
 
             app.UseEndpoints(endpoints =>
             {

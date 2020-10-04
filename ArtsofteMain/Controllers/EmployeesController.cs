@@ -59,12 +59,30 @@ namespace ArtsofteTestWebApp.Controllers
         }
         
         [HttpPut]
-        public IActionResult Put(Language language)
+        public IActionResult Put(EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
-                var rep = _uow.GetRepo("LanguageRepository") as LanguageRepository;
-                rep.Update(language);
+                var rep = _uow.GetRepo("EmployeeRepository") as EmployeeRepository;
+                var employee = new Employee
+                {
+                    EmployeeID = employeeViewModel.EmployeeID ?? 0,
+                    Name = employeeViewModel.Name,
+                    Surname = employeeViewModel.Surname,
+                    Age = employeeViewModel.Age,
+                    Gender = employeeViewModel.Gender,
+                    Department = new Department()
+                    {
+                        DepartmentID = rep.GetDepartmentIDByName(employeeViewModel.Department),
+                        Name = employeeViewModel.Department
+                    },
+                    Language = new Language()
+                    {
+                        LanguageID = rep.GetLanguageIDByName(employeeViewModel.Language),
+                        Name = employeeViewModel.Language
+                    }
+                };
+                rep.Update(employee);
                 return Ok();
             }
             return BadRequest();

@@ -5,19 +5,20 @@
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/package.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/app-routing.module.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/app.module.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/app.module.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/app.routing.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/app.server.module.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/app.server.module.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/departments/depts.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/departments/depts.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/departments/departments.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/departments/departments.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/autocomplete.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/employee.service.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/employee.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/emps.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/emps.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/employees.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/employees.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/langs.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/langs.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/language.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/languages.service.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/root/MainAPIService.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/root/main.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/root/main.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/main.ts" charset="UTF-8" />

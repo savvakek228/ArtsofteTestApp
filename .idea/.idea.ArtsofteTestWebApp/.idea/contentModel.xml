@@ -38,6 +38,9 @@
               <e p="ArtsofteDAL.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
+          <e p="Release" t="Include">
+            <e p="netcoreapp3.1" t="Include" />
+          </e>
         </e>
         <e p="POCO Entities" t="Include">
           <e p="Department.cs" t="Include" />
@@ -203,29 +206,27 @@
           <e p="src" t="Include">
             <e p="app" t="Include">
               <e p="app.module.ts" t="Include" />
+              <e p="app.routing.ts" t="Include" />
               <e p="app.server.module.ts" t="Include" />
               <e p="departments" t="Include">
                 <e p="department.ts" t="Include" />
-                <e p="departments.service.ts" t="Include" />
-                <e p="depts.component.html" t="Include" />
-                <e p="depts.component.ts" t="Include" />
+                <e p="departments.component.html" t="Include" />
+                <e p="departments.component.ts" t="Include" />
               </e>
               <e p="employees" t="Include">
-                <e p="autocomplete.js" t="Include" />
-                <e p="employee.service.ts" t="Include" />
                 <e p="employee.ts" t="Include" />
-                <e p="emps.component.html" t="Include" />
-                <e p="emps.component.ts" t="Include" />
+                <e p="employees.component.html" t="Include" />
+                <e p="employees.component.ts" t="Include" />
               </e>
               <e p="languages" t="Include">
                 <e p="langs.component.html" t="Include" />
                 <e p="langs.component.ts" t="Include" />
                 <e p="language.ts" t="Include" />
-                <e p="languages.service.ts" t="Include" />
               </e>
               <e p="root" t="Include">
                 <e p="main.component.html" t="Include" />
                 <e p="main.component.ts" t="Include" />
+                <e p="MainAPIService.ts" t="Include" />
               </e>
             </e>
             <e p="assets" t="Include">
@@ -258,8 +259,10 @@
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
               <e p="ArtsofteMain.AssemblyInfo.cs" t="Include" />
-              <e p="ArtsofteMain.RazorAssemblyInfo.cs" t="Include" />
             </e>
+          </e>
+          <e p="Release" t="Include">
+            <e p="netcoreapp3.1" t="Include" />
           </e>
         </e>
         <e p="Program.cs" t="Include" />

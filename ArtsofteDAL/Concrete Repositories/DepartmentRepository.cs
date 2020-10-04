@@ -31,7 +31,7 @@ namespace ArtsofteDAL.Concrete_Repositories
 
         public override void Update(Department type) =>
             Connection.Execute(
-                "UPDATE Departments SET EmployeeID = @EmployeeID, Name = @Name WHERE DepartmentID = @DepartmentID",
+                "UPDATE Departments SET Name = @Name WHERE DepartmentID = @DepartmentID",
                 type);
 
         public override List<Department> ReadAll()

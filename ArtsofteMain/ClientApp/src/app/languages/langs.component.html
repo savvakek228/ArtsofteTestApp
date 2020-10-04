@@ -1,28 +1,37 @@
 <h1>Языки программирования</h1>
 <input type="button" value="Добавить" class="btn btn-default" (click)="add()" />
-<table *ngIf="tableMode; else create" class="table table-striped">
+<table *ngIf="tableMode" class="table table-striped">
   <thead>
   <tr>
     <td>Название</td>
+    <td></td>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let p of languages; trackBy: trackByLangID">
-    <ng-template [ngIf]="language?.languageID != p.languageID" [ngIfElse]="edit">
-      <td>{{p?.name}}</td>
+  <tr *ngFor="let l of languages; trackBy: trackByLangID">
+    <ng-template [ngIf]="language?.languageID != l.languageID" [ngIfElse]="edit">
+      <td>{{l?.name}}</td>
       <td>
-        <button class="btn btn-sm btn-primary" (click)="editLanguage(p)">Изменить/Сохранить</button>
-        <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
+        <button class="btn btn-primary" (click)="editLanguage(l)">Изменить</button>
+        <button class="btn btn-danger" (click)="delete(l)">Удалить</button>
       </td>
     </ng-template>
   </tr>
   </tbody>
 </table>
 
-<!--шаблон для добавления-->
-<ng-template #create>
 
-</ng-template>
+<ng-container *ngIf="!tableMode">
+  <h2>Добавление нового языка программирования</h2>
+  <div class="form-group">
+    <label>Название языка</label>
+    <input type="text" [(ngModel)]="language.name" class="form-control">
+  </div>
+  <div>
+    <input type="button" value="Сохранить" (click)="submit()" class="btn btn-success"/>
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning"/>
+  </div>
+</ng-container>
 
 <ng-template #edit>
   <td>
@@ -31,7 +40,7 @@
     </label>
   </td>
   <td>
-    <input type="button" value="Сохранить" (click)="submit()" class="btn btn-sm btn-success">
-    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning">
+    <input type="button" value="Сохранить" (click)="submit()" class="btn btn-success">
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning">
   </td>
 </ng-template>

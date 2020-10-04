@@ -36,7 +36,7 @@ namespace ArtsofteDAL.Concrete_Repositories
 
         public override void Update(Language type) =>
             Connection.Execute(
-                "UPDATE Languages SET EmployeeID = @EmployeeID, Name = @Name WHERE LanguageID = @LanguageID",
+                "UPDATE Languages SET Name = @Name WHERE LanguageID = @LanguageID",
                 type);
     }
 }

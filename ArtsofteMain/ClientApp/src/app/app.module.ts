@@ -2,22 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { deptsComponent } from './departments/depts.component';
+import { DepartmentsComponent } from './departments/departments.component';
 import { langsComponent } from "./languages/langs.component";
-import { empsComponent } from "./employees/emps.component";
-import {RouterModule, Routes} from "@angular/router";
+import { EmployeesComponent } from "./employees/employees.component";
 import {rootComponent} from "./root/main.component";
-import {main} from "@angular/compiler-cli/src/main";
-
-const appRoutes: Routes = [
-  {path: '', component: empsComponent},
-  {path: 'depts', component: deptsComponent},
-  {path: 'langs', component: langsComponent}
-]
+import {AppRoutingModule} from "./app.routing";
 
 @NgModule({
-  imports: [BrowserModule,FormsModule, ReactiveFormsModule, HttpClientModule,RouterModule.forRoot(appRoutes)],
-  declarations: [deptsComponent,langsComponent, empsComponent,rootComponent],
+  imports: [BrowserModule,FormsModule, ReactiveFormsModule, HttpClientModule,AppRoutingModule],
+  declarations: [DepartmentsComponent,langsComponent, EmployeesComponent,rootComponent],
   bootstrap: [rootComponent]
 })
 export class AppModule { }

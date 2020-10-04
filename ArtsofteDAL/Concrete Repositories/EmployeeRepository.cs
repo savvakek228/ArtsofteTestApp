@@ -62,7 +62,8 @@ namespace ArtsofteDAL.Concrete_Repositories
 
         public override void Update(Employee type)
         {
-            Connection.Execute(@"UPDATE Employees SET Name = @Name, Surname = @Surname, Gender = @Gender, Age = @Age, DepartmentID = @Department.DepartmentID, LanguageID = @Language.LanguageID WHERE EmployeeID = @EmployeeID",type);
+            Connection.Execute(@"UPDATE Employees SET Name = @Name, Surname = @Surname, Gender = @Gender, Age = @Age, DepartmentID = @DepartmentID, LanguageID = @LanguageID WHERE EmployeeID = @EmployeeID",
+                new { type.EmployeeID, type.Name, type.Surname, type.Age, type.Gender, type.Department.DepartmentID, type.Language.LanguageID});
         }
     }
 }
