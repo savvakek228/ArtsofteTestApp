@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace ArtsofteDAL.POCO_Entities
+namespace ArtsofteDAL.Models
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class Department
@@ -11,8 +11,5 @@ namespace ArtsofteDAL.POCO_Entities
         public int DepartmentID { get; set; }
         public string Name { get; set; }
         public int Floor { get; set; }
-        
-        // nav property to Employees
-        public ICollection<Employee> Employees { get; set; }
     }
 }

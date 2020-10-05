@@ -3,7 +3,7 @@ import {Employee} from "./employee";
 import {Department} from "../departments/department";
 import {Language} from "../languages/language";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
-import {tap} from "rxjs/operators";
+import {map, tap} from "rxjs/operators";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MainAPIService} from "../root/MainAPIService";
 

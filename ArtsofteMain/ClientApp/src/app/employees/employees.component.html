@@ -36,7 +36,7 @@
   <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Имя</label>
-      <input id="name" type="text" class="form-control" formControlName="name"/>
+      <input autocomplete="on" id="name" type="text" class="form-control" formControlName="name"/>
       <div class="error" *ngIf="isControlInvalid('name')">
         Введите имя
       </div>

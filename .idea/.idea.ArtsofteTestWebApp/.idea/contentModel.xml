@@ -13,24 +13,25 @@
     <e p="C:\Users\savva\RiderProjects\ArtsofteTestWebApp" t="IncludeFlat">
       <e p="ArtsofteDAL" t="IncludeRecursive">
         <e p="ArtsofteDAL.csproj" t="IncludeRecursive" />
-        <e p="Base Classes" t="Include">
-          <e p="RepositoryBase.cs" t="Include" />
-        </e>
         <e p="bin" t="ExcludeRecursive" />
-        <e p="Concrete Repositories" t="Include">
+        <e p="ConcreteRepositories" t="Include">
           <e p="DepartmentRepository.cs" t="Include" />
           <e p="EmployeeRepository.cs" t="Include" />
           <e p="LanguageRepository.cs" t="Include" />
         </e>
-        <e p="Generic Interfaces" t="Include">
+        <e p="GenericInterfaces" t="Include">
           <e p="IRepository.cs" t="Include" />
-        </e>
-        <e p="Implementations" t="Include">
-          <e p="UnitOfWork.cs" t="Include" />
         </e>
         <e p="Interfaces" t="Include">
           <e p="IRepository.cs" t="Include" />
-          <e p="IUnitOfWork.cs" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="GenesisMigration.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="Department.cs" t="Include" />
+          <e p="Employee.cs" t="Include" />
+          <e p="Language.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -41,11 +42,6 @@
           <e p="Release" t="Include">
             <e p="netcoreapp3.1" t="Include" />
           </e>
-        </e>
-        <e p="POCO Entities" t="Include">
-          <e p="Department.cs" t="Include" />
-          <e p="Employee.cs" t="Include" />
-          <e p="Language.cs" t="Include" />
         </e>
       </e>
       <e p="ArtsofteMain" t="IncludeRecursive">
@@ -205,6 +201,7 @@
           <e p="README.md" t="Include" />
           <e p="src" t="Include">
             <e p="app" t="Include">
+              <e p="abstractions" t="Include" />
               <e p="app.module.ts" t="Include" />
               <e p="app.routing.ts" t="Include" />
               <e p="app.server.module.ts" t="Include" />
@@ -219,9 +216,9 @@
                 <e p="employees.component.ts" t="Include" />
               </e>
               <e p="languages" t="Include">
-                <e p="langs.component.html" t="Include" />
-                <e p="langs.component.ts" t="Include" />
                 <e p="language.ts" t="Include" />
+                <e p="languages.component.html" t="Include" />
+                <e p="languages.component.ts" t="Include" />
               </e>
               <e p="root" t="Include">
                 <e p="main.component.html" t="Include" />

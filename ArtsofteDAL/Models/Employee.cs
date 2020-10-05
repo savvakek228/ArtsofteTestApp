@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
  using System.Text.Json.Serialization;
 
- namespace ArtsofteDAL.POCO_Entities
+ namespace ArtsofteDAL.Models
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class Employee

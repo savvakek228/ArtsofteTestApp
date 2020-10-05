@@ -5,10 +5,10 @@ import {Subscription} from "rxjs";
 
 @Component({
   selector: "lang",
-  templateUrl: "langs.component.html",
+  templateUrl: "languages.component.html",
   providers: [MainAPIService]
 })
-export class langsComponent implements OnInit, OnDestroy{
+export class LanguagesComponent implements OnInit, OnDestroy{
   language: Language = new Language();
   languages: Language[];
   subscriptions: Subscription[] = [];

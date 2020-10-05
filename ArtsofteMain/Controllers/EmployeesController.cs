@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using ArtsofteDAL.Concrete_Repositories;
-using ArtsofteDAL.Interfaces;
-using ArtsofteDAL.POCO_Entities;
+using ArtsofteDAL.ConcreteRepositories;
+using ArtsofteDAL.GenericInterfaces;
+using ArtsofteDAL.Models;
 using ArtsofteTestWebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +13,13 @@ namespace ArtsofteTestWebApp.Controllers
     [Route("/employees")]
     public class EmployeesController : ControllerBase
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IRepository<Employee> _rep;
+        private readonly IDbConnection _conn;
 
-        public EmployeesController(IUnitOfWork uow)
+        public EmployeesController(IRepository<Employee> rep, IDbConnection connection)
         {
-            _uow = uow;
-            var employeeRepository = new EmployeeRepository(_uow);
-            _uow.RegisterRepo(employeeRepository);
+            _rep = rep;
+            _conn = connection;
         }
 
         [HttpPost]
@@ -26,7 +27,6 @@ namespace ArtsofteTestWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var rep = _uow.GetRepo("EmployeeRepository") as EmployeeRepository;
                 var employee = new Employee
                 {
                     Name = employeeViewModel.Name,
@@ -35,16 +35,16 @@ namespace ArtsofteTestWebApp.Controllers
                     Gender = employeeViewModel.Gender,
                     Department = new Department()
                     {
-                        DepartmentID = rep.GetDepartmentIDByName(employeeViewModel.Department),
+                        DepartmentID = EmployeeRepository.GetDepartmentIDByName(employeeViewModel.Department,_conn.ConnectionString),
                         Name = employeeViewModel.Department
                     },
                     Language = new Language()
                     {
-                        LanguageID = rep.GetLanguageIDByName(employeeViewModel.Language),
+                        LanguageID = EmployeeRepository.GetLanguageIDByName(employeeViewModel.Language, _conn.ConnectionString),
                         Name = employeeViewModel.Language
                     }
                 };
-                rep.Create(employee);
+                _rep.Create(employee);
                 return Ok();
             }
 
@@ -54,8 +54,7 @@ namespace ArtsofteTestWebApp.Controllers
         [HttpGet]
         public IEnumerable<Employee> Get()
         {
-            var rep = _uow.GetRepo("EmployeeRepository") as EmployeeRepository;
-            return rep.ReadAll().ToList();
+            return _rep.ReadAll().ToList();
         }
         
         [HttpPut]
@@ -63,7 +62,6 @@ namespace ArtsofteTestWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var rep = _uow.GetRepo("EmployeeRepository") as EmployeeRepository;
                 var employee = new Employee
                 {
                     EmployeeID = employeeViewModel.EmployeeID ?? 0,
@@ -73,16 +71,16 @@ namespace ArtsofteTestWebApp.Controllers
                     Gender = employeeViewModel.Gender,
                     Department = new Department()
                     {
-                        DepartmentID = rep.GetDepartmentIDByName(employeeViewModel.Department),
+                        DepartmentID = EmployeeRepository.GetDepartmentIDByName(employeeViewModel.Department, _conn.ConnectionString),
                         Name = employeeViewModel.Department
                     },
                     Language = new Language()
                     {
-                        LanguageID = rep.GetLanguageIDByName(employeeViewModel.Language),
+                        LanguageID = EmployeeRepository.GetLanguageIDByName(employeeViewModel.Language,_conn.ConnectionString),
                         Name = employeeViewModel.Language
                     }
                 };
-                rep.Update(employee);
+                _rep.Update(employee);
                 return Ok();
             }
             return BadRequest();
@@ -91,11 +89,10 @@ namespace ArtsofteTestWebApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var rep = _uow.GetRepo("EmployeeRepository") as EmployeeRepository;
-            Employee employee = rep.Read(id);
+            Employee employee = _rep.Read(id);
             if (employee != null)
             {
-                rep.Delete(id);
+                _rep.Delete(id);
             }
             return Ok();
         }

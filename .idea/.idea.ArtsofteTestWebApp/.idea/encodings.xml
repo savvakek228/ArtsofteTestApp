@@ -14,9 +14,9 @@
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/employee.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/employees.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/employees/employees.component.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/langs.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/langs.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/language.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/languages.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/languages.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/languages/languages.service.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/root/MainAPIService.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ArtsofteMain/ClientApp/src/app/root/main.component.html" charset="UTF-8" />
