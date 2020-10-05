@@ -22,14 +22,52 @@
         <Content Remove="$(SpaRoot)**" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+        <None Remove="publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+        <None Remove="publish\Microsoft.Extensions.Options.ConfigurationExtensions.dll" />
+        <None Remove="publish\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+        <None Remove="publish\Microsoft.Extensions.FileProviders.Physical.dll" />
+        <None Remove="publish\Microsoft.Extensions.Logging.Configuration.dll" />
+        <None Remove="publish\Microsoft.Extensions.Logging.Abstractions.dll" />
+        <None Remove="publish\Microsoft.Extensions.Configuration.Binder.dll" />
+        <None Remove="publish\Microsoft.Extensions.DependencyInjection.dll" />
+        <None Remove="publish\Microsoft.Extensions.FileSystemGlobbing.dll" />
+        <None Remove="publish\Microsoft.Extensions.Logging.Console.dll" />
+        <None Remove="publish\Microsoft.AspNetCore.NodeServices.dll" />
+        <None Remove="publish\Microsoft.AspNetCore.SpaServices.dll" />
+        <None Remove="publish\Microsoft.Extensions.Options.dll" />
+        <None Remove="publish\Microsoft.Extensions.Logging.dll" />
+        <Content Remove="publish\ArtsofteMain.runtimeconfig.json" />
+        <None Remove="publish\System.Data.SqlClient.dll" />
+        <Content Remove="publish\ArtsofteMain.deps.json" />
+        <None Remove="publish\ArtsofteMain.pdb" />
+        <None Remove="publish\ArtsofteMain.exe" />
+        <Content Remove="publish\appsettings.json" />
+        <None Remove="publish\ArtsofteDAL.pdb" />
+        <Content Remove="publish\web.config" />
+        <None Remove="publish\Dapper.dll" />
+        <None Remove="publish\ClientApp\dist\polyfills-es2015.5b10b8fd823b6392f1fd.js" />
+        <None Remove="publish\ClientApp\dist\runtime-es2015.c5fa8325f89fc516600b.js" />
+        <None Remove="publish\ClientApp\dist\polyfills-es5.3e8196928d184a6e5319.js" />
+        <None Remove="publish\ClientApp\dist\runtime-es5.c5fa8325f89fc516600b.js" />
+        <None Remove="publish\ClientApp\dist\main-es5.636a66178978ee495e7e.js" />
+        <None Remove="publish\ClientApp\dist\styles.4ba550d8b22074be3138.css" />
+        <None Remove="publish\ClientApp\dist\scripts.fd12c80ebcc479d5730a.js" />
+        <None Remove="publish\ClientApp\dist\3rdpartylicenses.txt" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="ClientApp\src\app\abstractions" />
+      <Folder Include="obj\Release\netcoreapp3.1" />
       <Folder Include="wwwroot" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\ArtsofteDAL\ArtsofteDAL.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

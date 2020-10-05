@@ -1,0 +1,46 @@
+<h1>Языки программирования</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="add()" />
+<table *ngIf="tableMode" class="table table-striped">
+  <thead>
+  <tr>
+    <td>Название</td>
+    <td></td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let l of languages; trackBy: trackByLangID">
+    <ng-template [ngIf]="language?.languageID != l.languageID" [ngIfElse]="edit">
+      <td>{{l?.name}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="editLanguage(l)">Изменить</button>
+        <button class="btn btn-danger" (click)="delete(l)">Удалить</button>
+      </td>
+    </ng-template>
+  </tr>
+  </tbody>
+</table>
+
+
+<ng-container *ngIf="!tableMode">
+  <h2>Добавление нового языка программирования</h2>
+  <div class="form-group">
+    <label>Название языка</label>
+    <input type="text" [(ngModel)]="language.name" class="form-control">
+  </div>
+  <div>
+    <input type="button" value="Сохранить" (click)="submit()" class="btn btn-success"/>
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning"/>
+  </div>
+</ng-container>
+
+<ng-template #edit>
+  <td>
+    <label>
+      <input type="text" [(ngModel)]="language.name" class="form-control">
+    </label>
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="submit()" class="btn btn-success">
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning">
+  </td>
+</ng-template>

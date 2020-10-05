@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using ArtsofteDAL;
-using ArtsofteDAL.Concrete_Repositories;
-using ArtsofteDAL.Implementations;
-using ArtsofteDAL.Interfaces;
-using ArtsofteDAL.POCO_Entities;
+using ArtsofteDAL.GenericInterfaces;
+using ArtsofteDAL.Models;
 
 namespace ArtsofteTestWebApp.Controllers
 {
@@ -15,21 +10,19 @@ namespace ArtsofteTestWebApp.Controllers
     [Route("/departments")]
     public class DepartmentsController : ControllerBase
     {
-        private readonly IUnitOfWork _uow;
-        public DepartmentsController(IUnitOfWork uow)
+        private readonly IRepository<Department> _rep;
+
+        public DepartmentsController(IRepository<Department> rep)
         {
-            _uow = uow;
-            var departmentRepository = new DepartmentRepository(_uow);
-            _uow.RegisterRepo(departmentRepository);
+            _rep = rep;
         }
+
         [HttpPost]
         public IActionResult Post(Department department)
         {
-            department.EmployeeID = new Random().Next(5);
             if (ModelState.IsValid)
             {
-                var rep = _uow.GetRepo("DepartmentRepository") as DepartmentRepository;
-                rep.Create(department);
+                _rep.Create(department);
                 return Ok();
             }
             return BadRequest(ModelState);
@@ -38,8 +31,13 @@ namespace ArtsofteTestWebApp.Controllers
         [HttpGet]
         public IEnumerable<Department> Get()
         {
-            var rep = _uow.GetRepo("DepartmentRepository") as DepartmentRepository;
-            return rep.ReadAll().ToList();
+            var departments = _rep.ReadAll().ToList();
+            if (!departments.Any())
+            {
+                _rep.Create(new Department{Name = "Отдел А", Floor = 4});
+                _rep.Create(new Department{Name = "Отдел Б", Floor = 6});
+            }
+            return departments;
         }
 
         [HttpPut]
@@ -47,8 +45,7 @@ namespace ArtsofteTestWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var rep = _uow.GetRepo("DepartmentRepository") as DepartmentRepository;
-                rep.Update(department);
+                _rep.Update(department);
                 return Ok();
             }
             return BadRequest();
@@ -57,11 +54,10 @@ namespace ArtsofteTestWebApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var rep = _uow.GetRepo("DepartmentRepository") as DepartmentRepository;
-            Department department = rep.Read(id);
+            Department department = _rep.Read(id);
             if (department != null)
             {
-                rep.Delete(id);
+                _rep.Delete(id);
             }
             return Ok();
         }

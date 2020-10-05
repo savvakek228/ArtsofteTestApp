@@ -1,12 +1,10 @@
 using System.Data;
 using System.Data.SqlClient;
-using ArtsofteDAL.Concrete_Repositories;
-using ArtsofteDAL.Implementations;
-using ArtsofteDAL.Interfaces;
-using ArtsofteDAL.POCO_Entities;
+using ArtsofteDAL.ConcreteRepositories;
+using ArtsofteDAL.GenericInterfaces;
+using ArtsofteDAL.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,10 +24,15 @@ namespace ArtsofteTestWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string dbConnectionString = Configuration.GetConnectionString("DefaultConnection");
             // In production, the Angular files will be served from this directory
+            services.AddCors();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
             services.AddControllers();
-            services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
+            services.AddScoped<IRepository<Department>, DepartmentRepository>();
+            services.AddScoped<IRepository<Language>,LanguageRepository>();
+            services.AddScoped<IRepository<Employee>, EmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +49,13 @@ namespace ArtsofteTestWebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+            });
 
             app.UseEndpoints(endpoints =>
             {

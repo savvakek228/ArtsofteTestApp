@@ -1,0 +1,85 @@
+<h1>Сотрудники</h1>
+<input class="btn btn-default" type="button" value="Добавить" (click)="add()"/>
+<table *ngIf="tableMode;" class="table table-striped">
+  <thead>
+  <tr>
+    <td>Имя</td>
+    <td>Фамилия</td>
+    <td>Возраст</td>
+    <td>Пол</td>
+    <td>Отдел</td>
+    <td>Язык программирования</td>
+    <td></td>
+  </tr>
+  </thead>
+  <tbody *ngIf="employee">
+  <tr *ngFor="let e of employees$ | async; trackBy: trackByEmpID">
+    <ng-template [ngIf]="employee?.employeeID != e.employeeID">
+      <td>{{e.name}}</td>
+      <td>{{e.surname}}</td>
+      <td>{{e.age}}</td>
+      <td>{{e.gender ? "Мужчина" : "Женщина"}}</td>
+      <td>{{e.department.name}}</td>
+      <td>{{e.language.name}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="editEmployee(e)">Редактировать</button>
+        <button class="btn btn-danger" (click)="delete(e)">Удалить</button>
+      </td>
+    </ng-template>
+  </tr>
+  </tbody>
+</table>
+
+
+<ng-container *ngIf="!tableMode">
+  <h2>{{this.editing ? "Редактирование существующего сотрудника" : "Добавление нового сотрудника"}}</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Имя</label>
+      <input autocomplete="on" id="name" type="text" class="form-control" formControlName="name"/>
+      <div class="error" *ngIf="isControlInvalid('name')">
+        Введите имя
+      </div>
+      <label for="surname">Фамилия</label>
+      <input id="surname" type="text" class="form-control" formControlName="surname"/>
+      <div class="error" *ngIf="isControlInvalid('surname')">
+        Введите фамилию
+      </div>
+      <label for="age">Возраст</label>
+      <input id="age" type="number" class="form-control" formControlName="age"/>
+      <div class="error" *ngIf="isControlInvalid('age')">
+        Укажите возраст сотрудника
+      </div>
+      <label for="gender">Пол</label>
+      <select id="gender" class="form-control" formControlName="gender">
+        <option *ngFor="let gender of genders" [value]="gender">
+          {{gender}}
+        </option>
+      </select>
+      <div class="error" *ngIf="isControlInvalid('gender')">
+        Укажите пол сотрудника
+      </div>
+      <label for="department">Отдел</label>
+      <select id="department" class="form-control" formControlName="department">
+        <option *ngFor="let dep of empDepartments$ | async" [value]="dep.name">
+          {{dep?.name}}
+        </option>
+      </select>
+      <div class="error" *ngIf="isControlInvalid('department')">
+        Выберите отдел, в котором сотрудник работает
+      </div>
+      <label for="language">Язык программирования</label>
+      <select id="language" class="form-control" formControlName="language">
+        <option *ngFor="let lang of empLanguages$ | async" [value]="lang.name">
+          {{lang?.name}}
+        </option>
+      </select>
+      <div class="error" *ngIf="isControlInvalid('language')">
+        Выберите язык программирования, на котором пишет сотрудник
+      </div>
+      <button class="btn btn-success" type="submit">Сохранить</button>
+      <button class="btn btn-warning" type="reset" (click)="revert()">Сброс</button>
+      <button type="button" class="btn btn-danger" (click)="cancel()">Отмена</button>
+    </div>
+  </form>
+</ng-container>

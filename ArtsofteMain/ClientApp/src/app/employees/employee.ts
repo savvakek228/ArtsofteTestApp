@@ -1,12 +1,15 @@
+import {Department} from "../departments/department";
+import {Language} from "../languages/language";
+
 export class Employee{
   constructor(
-    public id?: number,
+    public employeeID?: number,
     public name?: string,
     public surname?: string,
     public age?: number,
-    public gender?: string,
-    public department?: string,
-    public language?: string
+    public gender?: boolean,
+    public department?: Department,
+    public language?: Language
   ) {
   }
 }

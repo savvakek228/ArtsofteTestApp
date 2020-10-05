@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using ArtsofteDAL.Concrete_Repositories;
-using ArtsofteDAL.Interfaces;
-using ArtsofteDAL.POCO_Entities;
+using ArtsofteDAL.GenericInterfaces;
+using ArtsofteDAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArtsofteTestWebApp.Controllers
@@ -12,23 +10,19 @@ namespace ArtsofteTestWebApp.Controllers
     [Route("/languages")]
     public class LanguagesController : ControllerBase
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IRepository<Language> _rep;
 
-        public LanguagesController(IUnitOfWork uow)
+        public LanguagesController(IRepository<Language> rep)
         {
-            _uow = uow;
-            var languagesRepository = new LanguageRepository(_uow);
-            _uow.RegisterRepo(languagesRepository);
+            _rep = rep;
         }
-        
+
         [HttpPost]
         public IActionResult Post(Language language)
         {
-            language.EmployeeID = new Random().Next(4);
             if (ModelState.IsValid)
             {
-                var rep = _uow.GetRepo("LanguageRepository") as LanguageRepository;
-                rep.Create(language);
+                _rep.Create(language);
                 return Ok();
             }
             return BadRequest(ModelState);
@@ -37,8 +31,12 @@ namespace ArtsofteTestWebApp.Controllers
         [HttpGet]
         public IEnumerable<Language> Get()
         {
-            var rep = _uow.GetRepo("LanguageRepository") as LanguageRepository;
-            var res = rep.ReadAll().ToList();
+            var res = _rep.ReadAll().ToList();
+            if (!res.Any())
+            {
+                _rep.Create(new Language {Name = "C#"});
+                _rep.Create(new Language {Name = "JavaScript"});
+            }
             return res;
         }
 
@@ -47,8 +45,7 @@ namespace ArtsofteTestWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var rep = _uow.GetRepo("LanguageRepository") as LanguageRepository;
-                rep.Update(language);
+                _rep.Update(language);
                 return Ok();
             }
             return BadRequest();
@@ -57,11 +54,10 @@ namespace ArtsofteTestWebApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var rep = _uow.GetRepo("LanguageRepository") as LanguageRepository;
-            Language language = rep.Read(id);
+            Language language = _rep.Read(id);
             if (language != null)
             {
-                rep.Delete(id);
+                _rep.Delete(id);
             }
             return Ok();
         }
