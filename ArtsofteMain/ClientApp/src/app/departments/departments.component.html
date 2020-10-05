@@ -1,6 +1,6 @@
 <h1>Отделы</h1>
 <input type="button" value="Добавить" class="btn btn-default" (click)="add()"/>
-<table *ngIf="tableMode; else create" class="table table-striped">
+<table *ngIf="tableMode" class="table table-striped">
   <thead>
   <tr>
     <td>Название</td>
@@ -22,7 +22,7 @@
   </tbody>
 </table>
 
-<ng-template #create>
+<ng-container *ngIf="!tableMode">
   <h2>Создание нового отдела</h2>
   <div class="form-group">
     <label>Название отдела</label>
@@ -36,7 +36,7 @@
     <input type="button" value="Сохранить" (click)="submit()" class="btn btn-success"/>
     <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning"/>
   </div>
-</ng-template>
+</ng-container>
 
 <ng-template #edit>
   <td>
