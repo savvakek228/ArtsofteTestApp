@@ -111,6 +111,7 @@
           <e p="node_modules\jasmine-core" t="IncludeRecursive" />
           <e p="node_modules\jasmine-spec-reporter" t="IncludeRecursive" />
           <e p="node_modules\jest-worker" t="IncludeRecursive" />
+          <e p="node_modules\jquery" t="IncludeRecursive" />
           <e p="node_modules\karma" t="IncludeRecursive" />
           <e p="node_modules\karma-chrome-launcher" t="IncludeRecursive" />
           <e p="node_modules\karma-coverage-istanbul-reporter" t="IncludeRecursive" />
