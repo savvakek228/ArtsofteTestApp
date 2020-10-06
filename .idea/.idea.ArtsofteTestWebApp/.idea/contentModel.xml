@@ -55,6 +55,18 @@
           <e p=".gitignore" t="Include" />
           <e p="angular.json" t="Include" />
           <e p="browserslist" t="Include" />
+          <e p="dist" t="Include">
+            <e p="3rdpartylicenses.txt" t="Include" />
+            <e p="index.html" t="Include" />
+            <e p="main-es2015.636a66178978ee495e7e.js" t="Include" />
+            <e p="main-es5.636a66178978ee495e7e.js" t="Include" />
+            <e p="polyfills-es2015.5b10b8fd823b6392f1fd.js" t="Include" />
+            <e p="polyfills-es5.3e8196928d184a6e5319.js" t="Include" />
+            <e p="runtime-es2015.c5fa8325f89fc516600b.js" t="Include" />
+            <e p="runtime-es5.c5fa8325f89fc516600b.js" t="Include" />
+            <e p="scripts.9e7d3e9eed653021f88d.js" t="Include" />
+            <e p="styles.4ba550d8b22074be3138.css" t="Include" />
+          </e>
           <e p="e2e" t="Include">
             <e p="protractor.conf.js" t="Include" />
             <e p="src" t="Include">
