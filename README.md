@@ -1,7 +1,5 @@
 # ArtsofteTestApp
 
-Тестовое задание по С#
-
 Клиентская часть: Angular 8. (Потребуется установка NodeJS)
 
 Серверная: ASP.NET Core 3.1, Dapper, MS SQL Server.
